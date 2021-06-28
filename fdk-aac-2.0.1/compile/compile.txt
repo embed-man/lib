@@ -1,0 +1,3 @@
+./configure --enable-static CXX=ARCH-g++ CC=ARCH-gcc -prefix=install-dir  --host=ARCH(eg:mips)
+make
+make install

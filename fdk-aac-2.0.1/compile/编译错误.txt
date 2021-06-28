@@ -1,0 +1,28 @@
+编译mips架构遇到的问题:
+    
+    1、: error: 2.0.2": No such file or directory
+        只需修改: 
+            -DPACKAGE_STRING=\"fdk-aac\ 2.0.2\"   为    -DPACKAGE_STRING=\"fdk-aac-2.0.2\"
+            PACKAGE_STRING = fdk-aac 2.0.2   为   PACKAGE_STRING = fdk-aac-2.0.2
+
+            
+
+    2、编译好之后编码部分不能使用:
+        AACENC_ERROR aacEncEncode(
+                const HANDLE_AACENCODER   hAacEncoder,
+                const AACENC_BufDesc     *inBufDesc,
+                const AACENC_BufDesc     *outBufDesc,
+                const AACENC_InArgs      *inargs,
+                AACENC_OutArgs           *outargs
+                );
+
+
+        中的outargs->numOutBytes一直为0时
+        ##################################################################################################
+        if ((inBufDesc != NULL) && (inargs->numInSamples > 0)/* &&
+            (getBufDescIdx(inBufDesc, IN_AUDIO_DATA) != -1)*/) {
+
+        /* Fetch data until nSamplesToRead reached */
+        //INT idx = getBufDescIdx(inBufDesc, IN_AUDIO_DATA);
+        INT idx = 0;
+
